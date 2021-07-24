@@ -1,0 +1,21 @@
+﻿Build started 24.07.2021 23:25:47.
+     1>Project "C:\Users\user\Desktop\GameOfLifeCpp\GameOfLife\GameOfLife.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Desktop\GameOfLifeCpp\x64\Debug\GameOfLife.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\user\Desktop\GameOfLifeCpp\\lib "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\user\Desktop\GameOfLifeCpp\x64\Debug\GameOfLife.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Desktop\GameOfLifeCpp\x64\Debug\GameOfLife.lib" /MACHINE:X64 x64\Debug\GameOfLife.obj
+         x64\Debug\stdafx.obj
+     1>GameOfLife.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QEAA@PEBDAEBVlocale@std@@@Z) referenced in function main
+     1>GameOfLife.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::String::~String(void)" (__imp_??1String@sf@@QEAA@XZ) referenced in function main
+     1>GameOfLife.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QEAA@III@Z) referenced in function main
+     1>GameOfLife.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QEAA@VVideoMode@1@AEBVString@1@IAEBUContextSettings@1@@Z) referenced in function main
+     1>GameOfLife.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __cdecl sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UEAA@XZ) referenced in function main
+     1>C:\Users\user\Desktop\GameOfLifeCpp\\lib\sfml-graphics-d.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+     1>C:\Users\user\Desktop\GameOfLifeCpp\\lib\sfml-window-d.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+     1>C:\Users\user\Desktop\GameOfLifeCpp\\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+     1>C:\Users\user\Desktop\GameOfLifeCpp\\lib\sfml-network-d.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+     1>C:\Users\user\Desktop\GameOfLifeCpp\\lib\sfml-system-d.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+     1>C:\Users\user\Desktop\GameOfLifeCpp\x64\Debug\GameOfLife.exe : fatal error LNK1120: 5 unresolved externals
+     1>Done Building Project "C:\Users\user\Desktop\GameOfLifeCpp\GameOfLife\GameOfLife.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.35
