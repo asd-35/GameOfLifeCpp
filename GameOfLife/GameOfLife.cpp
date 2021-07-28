@@ -10,17 +10,21 @@ int main()
 {
 	VideoMode vm(1200, 960);
 
-	RenderWindow window(vm, "Game Of Life", Style::Fullscreen);
+	RenderWindow window(vm, "Game Of Life", Style::Default);
 	
+	//background
 	Texture textureBackground;
-	
 	textureBackground.loadFromFile("graphics/background.png");
-
 	Sprite spriteBackground;
-
 	spriteBackground.setTexture(textureBackground);
-
 	spriteBackground.setPosition(0, 0);
+
+	//cell
+	Texture textureCell;
+	textureCell.loadFromFile("graphics/cell.png");
+	Sprite spriteCell;
+	spriteCell.setTexture(textureCell);
+	spriteCell.setPosition(600, 480);
 
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -29,7 +33,8 @@ int main()
 
 		window.clear(); // clear the window
 
-		window.draw(spriteBackground); // background
+		window.draw(spriteBackground); // background draw
+		window.draw(spriteCell); // cell draw
 
 		window.display(); // update the window
 	}
