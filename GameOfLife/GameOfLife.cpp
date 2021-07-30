@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include <sstream> 
 #include "SFML\Graphics.hpp"
 
 using namespace sf;
@@ -28,6 +29,26 @@ int main()
 
 	Clock clock; // control time
 
+	//time in text
+	Text TimeText;
+	//middle the text to its bounds
+	FloatRect textRect = TimeText.getLocalBounds();
+	TimeText.setOrigin(textRect.left +
+		textRect.width / 2.0f,
+		textRect.top +
+		textRect.height / 2.0f);
+	
+	Font font;
+	font.loadFromFile("fonts/PerfectPixel.ttf");
+
+	TimeText.setFont(font);
+
+	TimeText.setString("Time = 0 seconds");
+	TimeText.setCharacterSize(50);
+	TimeText.setFillColor(Color::White);
+	TimeText.setPosition(0, 0);
+	
+
 	bool paused = true;
 
 	while (window.isOpen()) {
@@ -37,12 +58,23 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			paused = false;
+			
 		}
 
 		if (!paused) {
-			Time dt = clock.restart(); // res the clock
-			spriteCell.setPosition(spriteCell.getPosition().x + 0.1f, spriteCell.getPosition().y + 0.1f); // move the cell 
 			
+			//updating time
+			std::stringstream ss;
+			
+			
+			
+			Time dt = clock.restart(); // res the clock
+			 
+			ss << "Time = " << dt.asSeconds();
+			TimeText.setString(ss.str());
+
+			spriteCell.setPosition(spriteCell.getPosition().x + 0.1f, spriteCell.getPosition().y + 0.1f); // move the cell 
+
 		}
 		else {
 
@@ -53,6 +85,7 @@ int main()
 
 		window.draw(spriteBackground); // background draw
 		window.draw(spriteCell); // cell draw
+		window.draw(TimeText);
 
 		window.display(); // update the window
 	}
