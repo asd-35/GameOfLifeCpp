@@ -26,10 +26,28 @@ int main()
 	spriteCell.setTexture(textureCell);
 	spriteCell.setPosition(600, 480);
 
+	Clock clock; // control time
+
+	bool paused = true;
+
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 			window.close();
 		} // if esc pressed kill the window
+
+		if (Keyboard::isKeyPressed(Keyboard::Return)) {
+			paused = false;
+		}
+
+		if (!paused) {
+			Time dt = clock.restart(); // res the clock
+			spriteCell.setPosition(spriteCell.getPosition().x + 0.1f, spriteCell.getPosition().y + 0.1f); // move the cell 
+			
+		}
+		else {
+
+		}
+		
 
 		window.clear(); // clear the window
 
