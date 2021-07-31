@@ -1,4 +1,4 @@
-﻿Build started 31.07.2021 03:20:59.
+﻿Build started 1.08.2021 01:32:09.
      1>Project "C:\Users\user\Desktop\GameOfLifeCpp\GameOfLife\GameOfLife.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /IC:\Users\user\Desktop\GameOfLifeCpp\\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D "WIN32" /D _DEBUG /D _CONSOLE /D "_UNICODE" /D "UNICODE" /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\GameOfLife.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt GameOfLife.cpp
@@ -11,4 +11,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.42
+Time Elapsed 00:00:01.96

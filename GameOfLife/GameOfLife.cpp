@@ -9,7 +9,7 @@ using namespace sf;
 
 int main()
 {
-	VideoMode vm(1200, 960);
+	VideoMode vm(1920, 1080);
 
 	RenderWindow window(vm, "Game Of Life", Style::Default);
 	
@@ -49,8 +49,10 @@ int main()
 	TimeText.setPosition(0, 0);
 	
 	
-	float countedTime;
-	bool paused = true;
+	float countedTime; // games runtime
+	bool paused = true; // is the game paused ?
+	
+	enum class cellStatus {ALIVE,DEAD};
 
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -81,6 +83,12 @@ int main()
 
 		}
 		
+		Event event; // event test
+		while (window.pollEvent(event)) {
+			if (event.type == Event::MouseButtonPressed) {
+				TimeText.setFillColor(Color::Cyan);
+			}
+		}
 
 		window.clear(); // clear the window
 
