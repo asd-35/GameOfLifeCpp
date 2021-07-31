@@ -48,7 +48,8 @@ int main()
 	TimeText.setFillColor(Color::White);
 	TimeText.setPosition(0, 0);
 	
-
+	
+	float countedTime;
 	bool paused = true;
 
 	while (window.isOpen()) {
@@ -58,7 +59,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			paused = false;
-			
+			countedTime = 0.0f;
 		}
 
 		if (!paused) {
@@ -69,8 +70,8 @@ int main()
 			
 			
 			Time dt = clock.restart(); // res the clock
-			 
-			ss << "Time = " << dt.asSeconds();
+			countedTime += dt.asSeconds();
+			ss << "Time = " << countedTime;
 			TimeText.setString(ss.str());
 
 			spriteCell.setPosition(spriteCell.getPosition().x + 0.1f, spriteCell.getPosition().y + 0.1f); // move the cell 
@@ -85,7 +86,7 @@ int main()
 
 		window.draw(spriteBackground); // background draw
 		window.draw(spriteCell); // cell draw
-		window.draw(TimeText);
+		window.draw(TimeText);// draw the time
 
 		window.display(); // update the window
 	}
