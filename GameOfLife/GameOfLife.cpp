@@ -11,10 +11,20 @@ enum class cellStatus { ALIVE, DEAD }; // is the cell dead or alive ?
 
 int main()
 {
-	VideoMode vm(1920, 1080);
+	Vector2f resolution;
+	//get the desktops sizes for x and y
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
+
+	VideoMode vm(resolution.x, resolution.y);
 
 	RenderWindow window(vm, "Game Of Life", Style::Default);
 	
+	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
+
+	Vector2f mouseWorldPosition;
+	Vector2i mouseScreenPosition;
+
 	//background
 	Texture textureBackground;
 	textureBackground.loadFromFile("graphics/background.png");
