@@ -8,9 +8,12 @@
 using namespace sf;
 
 enum class cellStatus { ALIVE, DEAD }; // is the cell dead or alive ? 
+enum class gameStatus { PLAYING, PAUSE }; // is the cell dead or alive ? 
 
 int main()
 {
+	gameStatus gameState = gameStatus::PAUSE;
+	
 	Vector2f resolution;
 	//get the desktops sizes for x and y
 	resolution.x = VideoMode::getDesktopMode().width;
@@ -70,7 +73,7 @@ int main()
 	fpsText.setPosition(1525,0);
 	
 	float countedTime; // games runtime
-	bool paused = true; // is the game paused ?
+	
 	int drawCount = 0; // using to calculate fps
 	
 
@@ -80,12 +83,21 @@ int main()
 		} // if esc pressed kill the window
 
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
-			paused = false;
-			countedTime = 0.0f;
+			if (gameState == gameStatus::PAUSE) {
+				gameState = gameStatus::PLAYING;
+
+				countedTime = 0.0f;
+				clock.restart();
+				
+			}
+			
 		}
 
-		if (!paused) {
+		if (gameState != gameStatus::PAUSE) {
 			
+			mouseScreenPosition = Mouse::getPosition();
+			mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
+
 			//updating time
 			std::stringstream ss;
 			Time dt = clock.restart(); // res the clock
