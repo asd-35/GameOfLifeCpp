@@ -5,9 +5,9 @@
 #include <sstream> 
 #include "SFML\Graphics.hpp"
 
+
 using namespace sf;
 
-enum class cellStatus { ALIVE, DEAD }; // is the cell dead or alive ? 
 enum class gameStatus { PLAYING, PAUSE }; // is the cell dead or alive ? 
 
 int main()
@@ -35,18 +35,14 @@ int main()
 	spriteBackground.setTexture(textureBackground);
 	spriteBackground.setPosition(0, 0);
 
-	//cell
-	Texture textureCell;
-	textureCell.loadFromFile("graphics/cell.png");
-	Sprite spriteCell;
-	spriteCell.setTexture(textureCell);
-	spriteCell.setPosition(600, 480);
+	
+	
 
 	Clock clock; // control time
 
 	//time,fps in text
 	Text TimeText;
-	Text fpsText;
+	
 
 	//middle the text to its bounds
 	FloatRect textRect = TimeText.getLocalBounds();
@@ -66,16 +62,15 @@ int main()
 	TimeText.setPosition(0, 0);
 	
 	
-	fpsText.setFont(font);
-	fpsText.setString("FPS = 0");
-	fpsText.setCharacterSize(50);
-	fpsText.setFillColor(Color::White);
-	fpsText.setPosition(1525,0);
+	
 	
 	float countedTime; // games runtime
 	
-	int drawCount = 0; // using to calculate fps
 	
+	
+
+	
+
 
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -105,17 +100,6 @@ int main()
 			ss << "Time = " << countedTime;
 			TimeText.setString(ss.str());
 
-			drawCount++; // counting fps and updating
-			if (drawCount == 100) {
-				std::stringstream ss2;
-				ss2 << "FPS = " << 1 / dt.asSeconds();
-				fpsText.setString(ss2.str());
-				drawCount = 0;
-			}
-
-
-			spriteCell.setPosition(spriteCell.getPosition().x + 0.1f, spriteCell.getPosition().y + 0.1f); // move the cell 
-
 		}
 		else {
 
@@ -125,18 +109,13 @@ int main()
 		
 		Event event; // event test
 		while (window.pollEvent(event)) {
-			if (event.type == Event::MouseButtonPressed) {
-				TimeText.setFillColor(Color::Cyan);
-			}
+			
 		}
 
 		window.clear(); // clear the window
 
 		window.draw(spriteBackground); // background draw
-		window.draw(spriteCell); // cell draw
 		window.draw(TimeText);// draw the time
-		window.draw(fpsText); // draw the fps
-
 		window.display(); // update the window
 	}
 	return 0;
