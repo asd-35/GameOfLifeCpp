@@ -6,6 +6,7 @@
 #include "SFML\Graphics.hpp"
 #include "TextureHolder.h"
 #include "GameOfLife.h"
+#include <iostream>
 
 using namespace sf;
 
@@ -22,7 +23,7 @@ int main()
 
 	VideoMode vm(resolution.x, resolution.y);
 
-	RenderWindow window(vm, "Game Of Life", Style::Default);
+	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Resize );
 	
 	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -59,16 +60,19 @@ int main()
 
 	TimeText.setString("Time = 0 seconds");
 	TimeText.setCharacterSize(50);
-	TimeText.setFillColor(Color::White);
+	TimeText.setFillColor(Color::Black);
 	TimeText.setPosition(0, 0);
 	
 	
 	
 	float countedTime; // games runtime
+	Texture cellText;
+	cellText.loadFromFile("graphics/cell_alive.png");
+	Sprite cellSP;
+	cellSP.setTexture(cellText);
+	cellSP.setPosition(500, 500);
+
 	
-	Cell* cells = new Cell[1000];
-	int cell_x = 1910;
-	int cell_y = 1070;
 
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -78,18 +82,8 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			if (gameState == gameStatus::PAUSE) {
 				gameState = gameStatus::PLAYING;
-				
-				for (int i = 0; i < 1000; i++)
-				{
-					if (cell_x == 0) {
-						cell_x = 1910;
-						cell_y = cell_y - 10;
-					}
-					else {
-						cells[i].spawn(cell_x - 2, cell_y - 2, false);
-						cell_x = cell_x - 10;
-					}
-				}
+		
+
 				countedTime = 0.0f;
 				clock.restart();
 			}
@@ -118,20 +112,31 @@ int main()
 		Event event; // event test
 		while (window.pollEvent(event)) {
 			
+			switch (event.type)
+			{
+			case Event::Closed:
+				window.close();
+				break;
+			case Event::Resized:
+				std::cout << event.size.height << " " << event.size.width << std::endl;
+
+			default:
+				break;
+			}
 		}
 
-		window.clear(); // clear the window
+		window.clear(Color::White); // clear the window
 
-		window.draw(spriteBackground); // background draw
+		
 		window.draw(TimeText);// draw the time
 		if (gameState == gameStatus::PLAYING) {
-			for (int i = 0; i < 1000; i++)
-			{
-				window.draw(cells[i].getSprite());
-			}
+			
+			window.draw(cellSP);
+			
+			
 		}
 		window.display(); // update the window
 	}
-	delete[] cells;
+	
 	return 0;
 }

@@ -24,14 +24,8 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureHolder.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Cell.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOfLife.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -41,13 +35,7 @@
     <ClCompile Include="GameOfLife.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextureHolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Cell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateCells.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

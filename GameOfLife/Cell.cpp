@@ -7,17 +7,22 @@ using namespace std;
 void Cell::spawn(int x, int y, bool stat) {
 	cellStatus = stat;
 	Texture cellText;
-	cellText.loadFromFile("graphics/cell_dead.png");
+	cellText.loadFromFile("graphics/cell_alive.png");
 	if (!stat) {
-		cellSprite = Sprite(cellText);
+		//cellText.loadFromFile("graphics/cell_dead.png");
+		
+		cellSprite.setTexture(cellText);
 	}
 	else {
-		cellSprite = Sprite(TextureHolder::GetTexture("graphics/cell_alive.png"));
+		cellText.loadFromFile("graphics/cell_alive.png");
+		cellSprite = Sprite(cellText);
 	}
 	cellPos.x = x;
 	cellPos.y = y;
 
+	cellSprite.setOrigin(10, 10);
 	cellSprite.setPosition(x,y);
+	
 }
 
 bool Cell::isAlive() {
