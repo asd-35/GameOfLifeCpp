@@ -4,9 +4,8 @@
 #include "stdafx.h"
 #include <sstream> 
 #include "SFML\Graphics.hpp"
-#include "TextureHolder.h"
-#include "GameOfLife.h"
 #include <iostream>
+#include "Cell.h"
 
 using namespace sf;
 
@@ -23,7 +22,7 @@ int main()
 
 	VideoMode vm(resolution.x, resolution.y);
 
-	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Resize );
+	RenderWindow window(vm, "Game Of Life", Style::None | Style::Resize );
 	
 	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -37,8 +36,11 @@ int main()
 	spriteBackground.setTexture(textureBackground);
 	spriteBackground.setPosition(0, 0);
 
+	Texture cellTextDead;
+	Texture cellTextAlive;
 	
-	
+	cellTextAlive.loadFromFile("graphics/cell_alive.png");
+	cellTextAlive.loadFromFile("graphics/cell_dead.png");
 
 	Clock clock; // control time
 
@@ -66,23 +68,34 @@ int main()
 	
 	
 	float countedTime; // games runtime
-	Texture cellText;
-	cellText.loadFromFile("graphics/cell_alive.png");
-	Sprite cellSP;
-	cellSP.setTexture(cellText);
-	cellSP.setPosition(500, 500);
-
 	
-
+	int cell_spawn_x = resolution.x - 20;
+	int cell_spawn_y = resolution.y - 20;
+	
+	const int amountOfCells = 4750;
+	Cell* cells[amountOfCells];
+	
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+			gameState = gameStatus::PAUSE;
 			window.close();
+	
 		} // if esc pressed kill the window
 
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			if (gameState == gameStatus::PAUSE) {
 				gameState = gameStatus::PLAYING;
-		
+				
+				for (int i = 0; i < amountOfCells; i++) {
+					
+					if (cell_spawn_x == 0) {
+						cell_spawn_x = 1900;
+						cell_spawn_y = cell_spawn_y - 20;
+					}
+					
+					cells[i] = new Cell(cell_spawn_x, cell_spawn_y, false, cellTextAlive);
+					cell_spawn_x -= 20;
+				}
 
 				countedTime = 0.0f;
 				clock.restart();
@@ -103,9 +116,7 @@ int main()
 			TimeText.setString(ss.str());
 
 		}
-		else {
-
-		}
+		
 		
 		
 		
@@ -115,11 +126,10 @@ int main()
 			switch (event.type)
 			{
 			case Event::Closed:
+				
 				window.close();
+				
 				break;
-			case Event::Resized:
-				std::cout << event.size.height << " " << event.size.width << std::endl;
-
 			default:
 				break;
 			}
@@ -131,12 +141,18 @@ int main()
 		window.draw(TimeText);// draw the time
 		if (gameState == gameStatus::PLAYING) {
 			
-			window.draw(cellSP);
+			for (int i = 0; i < amountOfCells; i++)
+			{
+				window.draw(cells[i]->getSprite());
+			}
 			
 			
 		}
 		window.display(); // update the window
 	}
 	
+	for (int i = 0; i < amountOfCells; i++) {
+		delete cells[i];
+	}
 	return 0;
 }

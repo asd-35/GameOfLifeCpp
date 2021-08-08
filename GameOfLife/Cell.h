@@ -6,11 +6,15 @@ using namespace sf;
 class Cell //cell class
 {
 public:
+	
+	Cell(float x, float y, bool stat, Texture &text);
+	
 	FloatRect getPosition();
-	bool isAlive();
 	Sprite getSprite();
-	void update(Time elapsed);
-	void spawn(int x, int y, bool isAlive);
+
+	bool isAlive();
+	void update();
+	
 private:
 	bool cellStatus;
 	Sprite cellSprite;
