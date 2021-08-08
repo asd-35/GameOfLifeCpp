@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include <sstream> 
 #include "SFML\Graphics.hpp"
-
+#include "TextureHolder.h"
+#include "GameOfLife.h"
 
 using namespace sf;
 
@@ -63,14 +64,11 @@ int main()
 	
 	
 	
-	
 	float countedTime; // games runtime
 	
-	
-	
-
-	
-
+	Cell* cells = new Cell[1000];
+	int cell_x = 1910;
+	int cell_y = 1070;
 
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -80,10 +78,20 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			if (gameState == gameStatus::PAUSE) {
 				gameState = gameStatus::PLAYING;
-
+				
+				for (int i = 0; i < 1000; i++)
+				{
+					if (cell_x == 0) {
+						cell_x = 1910;
+						cell_y = cell_y - 10;
+					}
+					else {
+						cells[i].spawn(cell_x - 2, cell_y - 2, false);
+						cell_x = cell_x - 10;
+					}
+				}
 				countedTime = 0.0f;
 				clock.restart();
-				
 			}
 			
 		}
@@ -116,7 +124,14 @@ int main()
 
 		window.draw(spriteBackground); // background draw
 		window.draw(TimeText);// draw the time
+		if (gameState == gameStatus::PLAYING) {
+			for (int i = 0; i < 1000; i++)
+			{
+				window.draw(cells[i].getSprite());
+			}
+		}
 		window.display(); // update the window
 	}
+	delete[] cells;
 	return 0;
 }
