@@ -6,6 +6,7 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 #include "Cell.h"
+#include <crtdbg.h>
 
 using namespace sf;
 
@@ -77,7 +78,7 @@ int main()
 	
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
-			gameState = gameStatus::PAUSE;
+			
 			window.close();
 	
 		} // if esc pressed kill the window
@@ -150,9 +151,17 @@ int main()
 		}
 		window.display(); // update the window
 	}
+	if (gameState == gameStatus::PLAYING) {
+		for (int i = 0; i < amountOfCells; i++) {
 	
-	for (int i = 0; i < amountOfCells; i++) {
-		delete cells[i];
+			delete cells[i];
+		
+		}
+		
 	}
+	else {
+		cells[0] = NULL;
+	}
+	
 	return 0;
 }
