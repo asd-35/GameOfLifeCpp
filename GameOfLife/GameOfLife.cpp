@@ -23,7 +23,7 @@ int main()
 
 	VideoMode vm(resolution.x, resolution.y);
 
-	RenderWindow window(vm, "Game Of Life", Style::None | Style::Resize );
+	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Resize );
 	
 	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -41,7 +41,10 @@ int main()
 	Texture cellTextAlive;
 	
 	cellTextAlive.loadFromFile("graphics/cell_alive.png");
-	cellTextAlive.loadFromFile("graphics/cell_dead.png");
+	cellTextDead.loadFromFile("graphics/cell_dead.png");
+
+	Texture allText[2] = { cellTextAlive, cellTextDead };
+	Texture* ptrText = allText;
 
 	Clock clock; // control time
 
@@ -83,7 +86,7 @@ int main()
 			cell_spawn_y = cell_spawn_y - 20;
 		}
 
-		cells[i] = new Cell(cell_spawn_x, cell_spawn_y, false, cellTextAlive);
+		cells[i] = new Cell(cell_spawn_x, cell_spawn_y, false, allText);
 		cell_spawn_x -= 20;
 	}
 
@@ -108,8 +111,7 @@ int main()
 
 		if (gameState != gameStatus::PAUSE) {
 			
-			mouseScreenPosition = Mouse::getPosition();
-			mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
+			
 
 			//updating time
 			std::stringstream ss;
@@ -121,7 +123,16 @@ int main()
 		}
 		
 		if (gameState == gameStatus::PAUSE) {
-			//update will come here 
+			mouseScreenPosition = Mouse::getPosition();
+			mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
+			
+			if (Mouse::isButtonPressed(Mouse::Left)) {
+				for (int i = 0; i < amountOfCells; i++)
+				{
+					cells[i]->update(mouseScreenPosition.x, mouseScreenPosition.y, ptrText);
+				}
+			}
+
 		}
 		
 		
@@ -132,9 +143,7 @@ int main()
 			switch (event.type)
 			{
 			case Event::Closed:
-				
 				window.close();
-				
 				break;
 			default:
 				break;

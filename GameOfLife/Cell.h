@@ -7,13 +7,13 @@ class Cell //cell class
 {
 public:
 	
-	Cell(float x, float y, bool stat, Texture &text);
+	Cell(float x, float y, bool stat, Texture* text);
 	
 	FloatRect getPosition();
 	Sprite getSprite();
 
 	bool isAlive();
-	void update();
+	void update(float x, float y,Texture* text);
 	
 private:
 	bool cellStatus;
