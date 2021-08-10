@@ -76,6 +76,17 @@ int main()
 	const int amountOfCells = 4750;
 	Cell* cells[amountOfCells];
 	
+	for (int i = 0; i < amountOfCells; i++) {
+
+		if (cell_spawn_x == 0) {
+			cell_spawn_x = 1900;
+			cell_spawn_y = cell_spawn_y - 20;
+		}
+
+		cells[i] = new Cell(cell_spawn_x, cell_spawn_y, false, cellTextAlive);
+		cell_spawn_x -= 20;
+	}
+
 	while (window.isOpen()) {
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 			
@@ -87,16 +98,7 @@ int main()
 			if (gameState == gameStatus::PAUSE) {
 				gameState = gameStatus::PLAYING;
 				
-				for (int i = 0; i < amountOfCells; i++) {
-					
-					if (cell_spawn_x == 0) {
-						cell_spawn_x = 1900;
-						cell_spawn_y = cell_spawn_y - 20;
-					}
-					
-					cells[i] = new Cell(cell_spawn_x, cell_spawn_y, false, cellTextAlive);
-					cell_spawn_x -= 20;
-				}
+				
 
 				countedTime = 0.0f;
 				clock.restart();
@@ -118,6 +120,9 @@ int main()
 
 		}
 		
+		if (gameState == gameStatus::PAUSE) {
+			//update will come here 
+		}
 		
 		
 		
@@ -140,15 +145,15 @@ int main()
 
 		
 		window.draw(TimeText);// draw the time
-		if (gameState == gameStatus::PLAYING) {
+		
 			
-			for (int i = 0; i < amountOfCells; i++)
-			{
-				window.draw(cells[i]->getSprite());
-			}
-			
-			
+		for (int i = 0; i < amountOfCells; i++)
+		{
+			window.draw(cells[i]->getSprite());
 		}
+			
+			
+		
 		window.display(); // update the window
 	}
 	if (gameState == gameStatus::PLAYING) {
