@@ -25,18 +25,7 @@ int main()
 
 	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Fullscreen );
 	
-
-	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
-
-	Vector2f mouseWorldPosition;
 	Vector2i mouseScreenPosition;
-
-	//background
-	Texture textureBackground;
-	textureBackground.loadFromFile("graphics/background.png");
-	Sprite spriteBackground;
-	spriteBackground.setTexture(textureBackground);
-	spriteBackground.setPosition(0, 0);
 
 	Texture cellTextDead;
 	Texture cellTextAlive;
@@ -125,25 +114,7 @@ int main()
 		
 		if (gameState == gameStatus::PAUSE) {
 			mouseScreenPosition = Mouse::getPosition();
-			
-			
-			//if (Mouse::isButtonPressed(Mouse::Left)) {
-			//	FloatRect wow = cells[4724]->getPosition();
-			//	std::cout << wow.top << " " << wow.left << std::endl;
-			//	std::cout << wow.width << " " << wow.height << std::endl;
-				/*for (int i = 0; i < amountOfCells; i++)
-				{
-					if (cells[i]->getPosition().contains(mouseScreenPosition.x, mouseScreenPosition.y)) {
-						cells[i]->update(ptrText);
-						break;
-					}*/
-			//		
-
-			//	/*}*/
-			//}
-
-			
-
+		
 		}
 		
 		
