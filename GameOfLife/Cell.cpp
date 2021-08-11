@@ -38,8 +38,8 @@ Sprite Cell::getSprite() {
 	return cellSprite;
 }
 
-void Cell::update(float x, float y, Texture* text) {
-	if (this->getPosition().contains(x, y)) {
+void Cell::update(Texture* text) {
+	
 		if (!this->cellStatus) {
 			this->cellStatus = true;
 			this->cellSprite.setTexture(*text);
@@ -48,6 +48,6 @@ void Cell::update(float x, float y, Texture* text) {
 			this->cellStatus = false;
 			this->cellSprite.setTexture(*(text + 1));
 		}
-	}
+	
 }
 

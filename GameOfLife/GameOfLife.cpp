@@ -158,7 +158,12 @@ int main()
 				break;
 			case Event::MouseButtonPressed:
 				for (int i = 0; i < amountOfCells; i++) {
-					cells[i]->update(mouseScreenPosition.x, mouseScreenPosition.y, ptrText);
+					
+					if(cells[i]->getPosition().contains(mouseScreenPosition.x, mouseScreenPosition.y)) {
+						cells[i]->update(ptrText);
+						break;
+					}
+					
 					
 				}
 				
