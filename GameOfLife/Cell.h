@@ -13,7 +13,7 @@ public:
 	Sprite getSprite();
 
 	bool isAlive();
-	void update(float x, float y,Texture* text);
+	void update(float x, float y, Texture* text);
 	
 private:
 	bool cellStatus;

@@ -23,8 +23,9 @@ int main()
 
 	VideoMode vm(resolution.x, resolution.y);
 
-	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Resize );
+	RenderWindow window(vm, "Game Of Life", Style::Close | Style::Fullscreen );
 	
+
 	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
 
 	Vector2f mouseWorldPosition;
@@ -124,14 +125,24 @@ int main()
 		
 		if (gameState == gameStatus::PAUSE) {
 			mouseScreenPosition = Mouse::getPosition();
-			mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
 			
-			if (Mouse::isButtonPressed(Mouse::Left)) {
-				for (int i = 0; i < amountOfCells; i++)
+			
+			//if (Mouse::isButtonPressed(Mouse::Left)) {
+			//	FloatRect wow = cells[4724]->getPosition();
+			//	std::cout << wow.top << " " << wow.left << std::endl;
+			//	std::cout << wow.width << " " << wow.height << std::endl;
+				/*for (int i = 0; i < amountOfCells; i++)
 				{
-					cells[i]->update(mouseScreenPosition.x, mouseScreenPosition.y, ptrText);
-				}
-			}
+					if (cells[i]->getPosition().contains(mouseScreenPosition.x, mouseScreenPosition.y)) {
+						cells[i]->update(ptrText);
+						break;
+					}*/
+			//		
+
+			//	/*}*/
+			//}
+
+			
 
 		}
 		
@@ -144,6 +155,13 @@ int main()
 			{
 			case Event::Closed:
 				window.close();
+				break;
+			case Event::MouseButtonPressed:
+				for (int i = 0; i < amountOfCells; i++) {
+					cells[i]->update(mouseScreenPosition.x, mouseScreenPosition.y, ptrText);
+					
+				}
+				
 				break;
 			default:
 				break;
